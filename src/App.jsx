@@ -8,22 +8,22 @@ const App = () => {
   const [inputDiscriptionValue, setInputDiscriptionValue] = useState("");
   const [inputDataTime, setInputDataTime] = useState("");
   // inputs   =================================
-  const handleInputChange = (e) => {
+  const InputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  const handleInputDiscriptionChange = (e) => {
+  const InputDiscriptionChange = (e) => {
     setInputDiscriptionValue(e.target.value);
   };
 
-  const handleInputDataTimeChange = (e) => {
+  const InputDataTimeChange = (e) => {
     setInputDataTime(e.target.value);
   };
 
 
 //New data =================================
 
-const newData={
+const data={
   id : Math.random() * 10000,
   title:inputValue,
   description:inputDiscriptionValue,
@@ -32,9 +32,9 @@ const newData={
 
 
   //  setTodos New Data =================================
-  const handleAddTodo = () => {
+  const AddTodo = () => {
     if (inputValue.trim() !== '' &&  inputDiscriptionValue.trim() !== '' && inputDataTime.trim() !== '') {
-      setTodos([...todos, newData]);
+      setTodos([...todos, data]);
       setInputValue('');
       setInputDiscriptionValue('');
       setInputDataTime('');
@@ -45,13 +45,13 @@ const newData={
 
   //  Delete Data =================================
 
-  const handleDeleteTodo = (id) => {
+  const DeleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id!== id));
   };
 
   //  Edit Data =================================
 
-  const handleEditTodo = (id) => {
+  const EditTodo = (id) => {
     setInputValue(todos.find((todo) => todo.id === id).title);
     setInputDiscriptionValue(todos.find((todo) => todo.id === id).description);
     setInputDataTime(todos.find((todo) => todo.id === id).date);
@@ -68,17 +68,17 @@ const newData={
         <h1 className="text-[36px] text-center text-green-500 font-semibold mb-3">Todo List</h1>
         <label htmlFor="titil">
           <p className="text-[20px] py-2 text-green-500 font-semibold">Title add</p>
-          <input onChange={handleInputChange} value={inputValue} type="text" id="titil" className="w-[100%] py-2 px-5 outline-none border-2 rounded-md" placeholder=" title . . ." />
+          <input onChange={InputChange} value={inputValue} type="text" id="titil" className="w-[100%] py-2 px-5 outline-none border-2 rounded-md" placeholder=" title . . ." />
         </label>
         <label htmlFor="">
           <p className="text-[20px] py-2 text-green-500 font-semibold">Description add</p>
-          <textarea onChange={handleInputDiscriptionChange} value={inputDiscriptionValue} className="w-[100%] py-2 px-5 h-[150px] outline-none border-2 rounded-md" placeholder=" Discripshin . . . . ."></textarea>
+          <textarea onChange={InputDiscriptionChange} value={inputDiscriptionValue} className="w-[100%] py-2 px-5 h-[150px] outline-none border-2 rounded-md" placeholder=" Discripshin . . . . ."></textarea>
         </label>
         <label htmlFor="titil">
           <p className="text-[20px] py-2 text-green-500 font-semibold">Date time add</p>
-          <input onChange={handleInputDataTimeChange} value={inputDataTime} type="datetime-local" id="titil" className="w-[50%] text-blue-950 text-[20px] py-2 px-5 outline-none border-2 rounded-md" />
+          <input onChange={InputDataTimeChange} value={inputDataTime} type="datetime-local" id="titil" className="w-[50%] text-blue-950 text-[20px] py-2 px-5 outline-none border-2 rounded-md" />
         </label>
-        <button onClick={handleAddTodo} className="bg-green-500 text-[20px] text-white py-[10px] ml-[50px]  px-7 rounded-md  "> <i className="bi bi-file-earmark-plus-fill mr-2"></i>add</button>
+        <button onClick={AddTodo} className="bg-green-500 text-[20px] text-white py-[10px] ml-[50px]  px-7 rounded-md  "> <i className="bi bi-file-earmark-plus-fill mr-2"></i>add</button>
       </div>
       <ul className="w-[1000px] mx-auto  mt-20 mb-5 grid grid-cols-3 gap-6">
         {
@@ -90,10 +90,10 @@ const newData={
                   {el.description.length>150?el.description.slice(0,147)+" ...":el.description}
                 </p>
                 <p className="text-[18px] py-3 text-[#3c9e9e] text-center  font-bold">{el.date.slice(0,10) + " Time " + el.date.slice(11) }</p>
-                <button onClick={ () => handleDeleteTodo(el.id)} className="bg-red-500 text-[20px] text-white py-[10px] mt-2  px-7 rounded-md "><i className="bi bi-trash3-fill text-white mr-2"></i>delete</button>
+                <button onClick={ () => DeleteTodo(el.id)} className="bg-red-500 text-[20px] text-white py-[10px] mt-2  px-7 rounded-md "><i className="bi bi-trash3-fill text-white mr-2"></i>delete</button>
                 <button onClick={ () => {
-                  handleEditTodo(el.id) 
-                  handleDeleteTodo(el.id)
+                  EditTodo(el.id) 
+                  DeleteTodo(el.id)
                   } } className="bg-orange-500 text-[20px] text-white py-[10px] mt-2  px-7 rounded-md ml-3"><i className="bi bi-pencil-square text-white mr-2"></i>edit</button>
               </li>
             </>
